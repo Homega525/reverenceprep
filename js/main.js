@@ -47,7 +47,7 @@
     `,
   };
 
-  const contentFiles = {
+  const fallbackContentFiles = {
     blog: [
       'content/blog/2026-01-12-study-habits.md',
       'content/blog/2026-02-08-stem-fair.md',
@@ -70,6 +70,35 @@
       'content/gallery/gallery-campus-2.md',
     ],
   };
+
+  let manifestPromise = null;
+
+  async function loadContentManifest() {
+    if (manifestPromise) return manifestPromise;
+
+    manifestPromise = (async () => {
+      try {
+        const response = await fetch('/.netlify/functions/content-manifest', { cache: 'no-store' });
+        if (!response.ok) throw new Error('manifest request failed');
+        const payload = await response.json();
+        if (!payload || typeof payload !== 'object') throw new Error('invalid manifest payload');
+
+        const collections = ['blog', 'events', 'gallery'];
+        const manifest = {};
+
+        collections.forEach((name) => {
+          const files = Array.isArray(payload[name]) ? payload[name] : [];
+          manifest[name] = files.filter((file) => typeof file === 'string' && file.endsWith('.md'));
+        });
+
+        return manifest;
+      } catch (error) {
+        return fallbackContentFiles;
+      }
+    })();
+
+    return manifestPromise;
+  }
 
   async function loadPartial(targetSelector, path, fallbackKey) {
     const target = document.querySelector(targetSelector);
@@ -233,6 +262,7 @@
   }
 
   async function loadCollection(collectionName) {
+    const contentFiles = await loadContentManifest();
     const files = contentFiles[collectionName] || [];
     const rows = await Promise.all(
       files.map(async (file) => {

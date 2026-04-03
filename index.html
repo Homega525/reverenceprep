@@ -29,6 +29,8 @@
     <script src="js/carousel.js" defer></script>
     <script src="js/forms.js" defer></script>
     <script src="js/main.js" defer></script>
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="icon" type="image/png" href="assets/img/logo/favicon.png" />
   </head>
   <body class="has-hero" data-page="home">
@@ -429,5 +431,17 @@
     </main>
 
     <footer id="site-footer" class="site-footer footer"></footer>
+    <script>
+      // Handle Netlify Identity redirects (invite, password reset, etc.)
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

@@ -54,14 +54,12 @@
       'content/blog/2026-03-03-parent-partnership.md',
     ],
     events: [
+      'content/events/2026-01-07-library-upgrade.md',
       'content/events/2026-01-20-open-day.md',
+      'content/events/2026-02-02-scholarship-drive.md',
       'content/events/2026-02-14-sports-festival.md',
+      'content/events/2026-03-18-exam-success.md',
       'content/events/2026-03-10-cultural-week.md',
-    ],
-    news: [
-      'content/news/2026-01-07-library-upgrade.md',
-      'content/news/2026-02-02-scholarship-drive.md',
-      'content/news/2026-03-18-exam-success.md',
     ],
     gallery: [
       'content/gallery/gallery-events-1.md',
@@ -242,7 +240,12 @@
           const response = await fetch(file);
           if (!response.ok) throw new Error('failed');
           const text = await response.text();
-          return parseFrontmatter(text);
+          return {
+            ...parseFrontmatter(text),
+            _file: file,
+            _slug: file.split('/').pop()?.replace('.md', ''),
+            _collection: collectionName,
+          };
         } catch (error) {
           return null;
         }
@@ -257,6 +260,24 @@
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return value;
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  function normalizeCategory(category) {
+    return (category || '').toString().trim().toLowerCase();
+  }
+
+  function sortByDateDesc(entries) {
+    return [...entries].sort((a, b) => {
+      const first = new Date(a.event_date || a.date || 0).getTime() || 0;
+      const second = new Date(b.event_date || b.date || 0).getTime() || 0;
+      return second - first;
+    });
+  }
+
+  function getArticleHref(data, fallbackCollection) {
+    const collection = encodeURIComponent(data._collection || fallbackCollection);
+    const slug = encodeURIComponent(data._slug || '');
+    return `article.html?collection=${collection}&slug=${slug}`;
   }
 
   function renderCard(data, type) {
@@ -281,7 +302,7 @@
         <span class="date-badge">${date}</span>
         <h3>${title}</h3>
         <p>${excerpt}</p>
-        <a class="section-cta" href="#" aria-label="Read more about ${title}">Read More</a>
+        <a class="section-cta" href="${getArticleHref(data, type)}" aria-label="Read more about ${title}">Read More</a>
       </article>
     `;
   }
@@ -302,14 +323,21 @@
     if (eventsGrid) {
       const entries = await loadCollection('events');
       if (entries.length) {
-        eventsGrid.innerHTML = entries.map((entry) => renderCard(entry, 'events')).join('');
+        const sorted = sortByDateDesc(entries);
+        eventsGrid.innerHTML = sorted.map((entry) => renderCard(entry, 'events')).join('');
       }
     }
 
     if (newsGrid) {
-      const entries = await loadCollection('news');
+      const entries = await loadCollection('events');
       if (entries.length) {
-        newsGrid.innerHTML = entries.map((entry) => renderCard(entry, 'news')).join('');
+        const newsEntries = sortByDateDesc(entries).filter((entry) => {
+          const category = normalizeCategory(entry.category);
+          return category === 'news' || (!category && !entry.event_date);
+        });
+        if (newsEntries.length) {
+          newsGrid.innerHTML = newsEntries.map((entry) => renderCard(entry, 'news')).join('');
+        }
       }
     }
 
@@ -320,6 +348,144 @@
       }
       initGalleryFeatures();
     }
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function renderInlineMarkdown(text) {
+    let rendered = escapeHtml(text || '');
+    rendered = rendered.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)/g, (_full, alt, src, title) => {
+      const safeAlt = escapeHtml(alt);
+      const safeSrc = escapeHtml(src);
+      const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+      return `<img src="${safeSrc}" alt="${safeAlt}"${titleAttr}>`;
+    });
+    rendered = rendered.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_full, label, href) => {
+      const safeLabel = escapeHtml(label);
+      const safeHref = escapeHtml(href);
+      const external = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${safeHref}"${external}>${safeLabel}</a>`;
+    });
+    return rendered;
+  }
+
+  function markdownToHtml(markdown) {
+    const lines = (markdown || '').replace(/\r\n/g, '\n').split('\n');
+    const blocks = [];
+    let paragraph = [];
+    let list = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      blocks.push(`<p>${renderInlineMarkdown(paragraph.join(' '))}</p>`);
+      paragraph = [];
+    };
+
+    const flushList = () => {
+      if (!list.length) return;
+      blocks.push(`<ul>${list.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join('')}</ul>`);
+      list = [];
+    };
+
+    lines.forEach((rawLine) => {
+      const line = rawLine.trim();
+      if (!line) {
+        flushParagraph();
+        flushList();
+        return;
+      }
+
+      if (line.startsWith('### ')) {
+        flushParagraph();
+        flushList();
+        blocks.push(`<h3>${renderInlineMarkdown(line.slice(4))}</h3>`);
+        return;
+      }
+
+      if (line.startsWith('## ')) {
+        flushParagraph();
+        flushList();
+        blocks.push(`<h2>${renderInlineMarkdown(line.slice(3))}</h2>`);
+        return;
+      }
+
+      if (line.startsWith('# ')) {
+        flushParagraph();
+        flushList();
+        blocks.push(`<h1>${renderInlineMarkdown(line.slice(2))}</h1>`);
+        return;
+      }
+
+      if (line.startsWith('- ')) {
+        flushParagraph();
+        list.push(line.slice(2));
+        return;
+      }
+
+      if (line.startsWith('![')) {
+        flushParagraph();
+        flushList();
+        blocks.push(renderInlineMarkdown(line));
+        return;
+      }
+
+      paragraph.push(line);
+    });
+
+    flushParagraph();
+    flushList();
+    return blocks.join('\n');
+  }
+
+  async function renderArticlePage() {
+    const articleBody = document.getElementById('articleBody');
+    if (!articleBody) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const collection = params.get('collection') || 'events';
+    const slug = params.get('slug') || '';
+
+    const articleTitle = document.getElementById('articleTitle');
+    const articleMeta = document.getElementById('articleMeta');
+    const articleImage = document.getElementById('articleImage');
+    const articleCategory = document.getElementById('articleCategory');
+    const articleBackLink = document.getElementById('articleBackLink');
+
+    const entries = await loadCollection(collection);
+    const entry = entries.find((row) => row._slug === slug);
+
+    if (!entry) {
+      if (articleTitle) articleTitle.textContent = 'Article not found';
+      if (articleMeta) articleMeta.textContent = 'The requested article could not be loaded.';
+      articleBody.innerHTML = '<p>Please return to News & Events or Blog and open another article.</p>';
+      if (articleImage) articleImage.remove();
+      return;
+    }
+
+    if (articleTitle) articleTitle.textContent = entry.title || 'Article';
+    if (articleMeta) articleMeta.textContent = formatDate(entry.event_date || entry.date);
+    if (articleImage) {
+      articleImage.src = entry.image || 'assets/img/about/news-1.jpg';
+      articleImage.alt = entry.title || 'Article image';
+    }
+    if (articleCategory) {
+      const category = normalizeCategory(entry.category) || (entry._collection === 'blog' ? 'blog' : 'event');
+      articleCategory.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    }
+    if (articleBackLink) {
+      const isBlog = entry._collection === 'blog';
+      articleBackLink.href = isBlog ? 'blog.html' : 'events.html';
+      articleBackLink.textContent = isBlog ? 'Back to Blog' : 'Back to News & Events';
+    }
+
+    articleBody.innerHTML = markdownToHtml(entry.body);
   }
 
   function initGalleryFeatures() {
@@ -407,6 +573,7 @@
     initFadeIns();
     initHeroCardReveal();
     initStatsCounter();
+    await renderArticlePage();
     renderDynamicContent();
   }
 

@@ -1,6 +1,7 @@
 ---
 title: Junior High Cultural and Old School Day Ends on a High Note
 date: 2026-04-03T15:00:00.000+00:00
+category: News
 image: assets/img/about/news-2.jpg
 excerpt: Our Junior High Cultural and Old School Day ended successfully on
   Friday, 3rd April 2026, with students showcasing culture, creativity and old

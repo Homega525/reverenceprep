@@ -524,6 +524,42 @@ body[data-page='home'] .site-navbar:not(.nav-solid) .logo-sub {
   object-fit: cover;
 }
 
+.article-layout {
+  max-width: 860px;
+}
+
+.article-cover {
+  margin: 10px 0 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.article-body {
+  display: grid;
+  gap: 16px;
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  margin-top: 8px;
+}
+
+.article-body ul {
+  padding-left: 20px;
+  color: var(--color-muted);
+}
+
+.article-body a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.article-body img {
+  border-radius: 12px;
+  margin: 4px 0 6px;
+}
+
 .contact-teaser,
 .contact-page-grid,
 .map-wrap {

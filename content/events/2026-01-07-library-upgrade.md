@@ -1,6 +1,7 @@
 ---
 title: Reverence Preparatory Wins 2026 Perfect Series Northern Zone Contest
 date: 2026-04-01T15:00:00.000+00:00
+category: News
 image: /assets/img/uploads/whatsapp-image-2026-04-03-at-4.39.33-pm.jpeg
 excerpt: Reverence Preparatory and Junior High School has emerged winner
 ---
@@ -16,4 +17,3 @@ In recognition of this achievement, the school received a cash prize of GH¢6,00
 This achievement is a proud moment for the entire Reverence Preparatory community. It highlights the school’s dedication to quality teaching and learning, and its commitment to nurturing confident, capable and high-achieving learners.
 
 The school congratulates all participating pupils, teachers and supporters who contributed to this remarkable success, and looks forward with confidence to the next stage of the competition.
-

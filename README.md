@@ -43,7 +43,7 @@ The site is built with:
 6. Go to yourdomain.netlify.app/admin to access the CMS.
 7. From there you can:
    - Write and publish blog posts (with images)
-   - Create events and news entries
+   - Create events and news entries in one shared collection
    - Add/remove gallery images
    - All changes auto-deploy to the live site via GitHub.
 
@@ -53,7 +53,7 @@ The site is built with:
 - `css/`: global styles, components, hero, carousel, responsive rules
 - `js/`: navbar, carousel, forms, animations, content loading, gallery features
 - `admin/`: Decap CMS admin panel + CMS config
-- `content/`: markdown content for blog, events, news, and gallery
+- `content/`: markdown content for blog, events (including news), and gallery
 - `assets/`: images, uploads, and icons
 - `_redirects`, `netlify.toml`: Netlify routing and deploy configuration
 
@@ -62,7 +62,6 @@ The site is built with:
 2. Choose a collection:
    - **Blog Posts**
    - **Events & News**
-   - **News**
    - **Gallery Images**
 3. Create or edit entries.
 4. Publish changes from the CMS editor.

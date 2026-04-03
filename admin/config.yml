@@ -26,21 +26,10 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Event Date", name: "event_date", widget: "date" }
+      - { label: "Type", name: "category", widget: "select", options: ["Event", "News"], default: "Event" }
+      - { label: "Event Date", name: "event_date", widget: "date", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "Description", name: "excerpt", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "news"
-    label: "News"
-    folder: "content/news"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "gallery"

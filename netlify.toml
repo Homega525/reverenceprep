@@ -1,6 +1,9 @@
 [build]
   publish = "."
 
+[functions]
+  included_files = ["content/**/*.md"]
+
 [[redirects]]
   from = "/admin"
   to = "/admin/index.html"

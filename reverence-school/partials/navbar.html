@@ -1,0 +1,105 @@
+<nav class="site-navbar navbar" aria-label="Primary Navigation">
+  <div class="container nav-inner">
+    <a
+      href="index.html"
+      class="nav-logo"
+      aria-label="Reverence Preparatory School Home"
+    >
+      <span class="logo-wordmark">Reverence</span>
+      <span class="logo-sub">Preparatory & JHS School</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobileDrawer"
+    >
+      <span aria-hidden="true">☰</span>
+    </button>
+
+    <ul class="nav-links" id="desktopNav">
+      <li><a data-page="home" href="index.html">Home</a></li>
+      <li><a data-page="about" href="about.html">About</a></li>
+      <li><a data-page="academics" href="academics.html">Academics</a></li>
+      <li class="has-dropdown">
+        <button
+          class="dropdown-toggle"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Schools
+        </button>
+        <ul class="dropdown-menu" aria-label="Schools submenu">
+          <li><a data-page="shs" href="shs.html">SHS</a></li>
+          <li><a data-page="jhs" href="jhs.html">JHS</a></li>
+          <li><a data-page="primary" href="primary.html">Primary</a></li>
+          <li><a data-page="preschool" href="preschool.html">Pre-School</a></li>
+        </ul>
+      </li>
+      <li><a data-page="gallery" href="gallery.html">Gallery</a></li>
+      <li><a data-page="events" href="events.html">Events</a></li>
+      <li><a data-page="blog" href="blog.html">Blog</a></li>
+      <li><a data-page="contact" href="contact.html">Contact</a></li>
+    </ul>
+
+    <a
+      class="btn btn-admissions btn-gold"
+      data-page="admissions"
+      href="admissions.html"
+      >Admissions</a
+    >
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside
+    class="mobile-drawer"
+    id="mobileDrawer"
+    aria-label="Mobile Navigation"
+    aria-hidden="true"
+  >
+    <div class="drawer-head">
+      <a
+        href="index.html"
+        class="nav-logo"
+        aria-label="Reverence Preparatory School Home"
+      >
+        <span class="logo-wordmark">Reverence</span>
+        <span class="logo-sub">Preparatory School</span>
+      </a>
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+        ✕
+      </button>
+    </div>
+    <ul class="drawer-links">
+      <li><a data-page="home" href="index.html">Home</a></li>
+      <li><a data-page="about" href="about.html">About</a></li>
+      <li><a data-page="academics" href="academics.html">Academics</a></li>
+      <li>
+        <button
+          class="drawer-dropdown-toggle"
+          id="drawerSchoolsToggle"
+          aria-expanded="false"
+        >
+          Schools ▾
+        </button>
+        <ul class="drawer-dropdown" id="drawerSchoolsMenu" hidden>
+          <li><a data-page="shs" href="shs.html">SHS</a></li>
+          <li><a data-page="jhs" href="jhs.html">JHS</a></li>
+          <li><a data-page="primary" href="primary.html">Primary</a></li>
+          <li><a data-page="preschool" href="preschool.html">Pre-School</a></li>
+        </ul>
+      </li>
+      <li><a data-page="gallery" href="gallery.html">Gallery</a></li>
+      <li><a data-page="events" href="events.html">Events</a></li>
+      <li><a data-page="blog" href="blog.html">Blog</a></li>
+      <li><a data-page="contact" href="contact.html">Contact</a></li>
+      <li>
+        <a data-page="admissions" class="btn btn-primary" href="admissions.html"
+          >Admissions</a
+        >
+      </li>
+    </ul>
+  </aside>
+</nav>

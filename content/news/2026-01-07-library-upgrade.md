@@ -1,6 +1,6 @@
 ---
 title: Reverence Preparatory Wins 2026 Perfect Series Northern Zone Contest
-date: 2026-01-04T15:00:00.000+00:00
+date: 2026-04-01T15:00:00.000+00:00
 image: /assets/img/uploads/whatsapp-image-2026-04-03-at-4.39.33-pm.jpeg
 excerpt: Reverence Preparatory and Junior High School has emerged winner
 ---

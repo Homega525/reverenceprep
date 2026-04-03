@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[forms.notifications]]
+  event = "submission_created"
+  type = "email"
+  to = "nimohrichard430@gmail.com"

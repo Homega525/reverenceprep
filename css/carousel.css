@@ -185,6 +185,11 @@
   display: none;
 }
 
+.news-view-all-btn {
+  display: table;
+  margin-inline: auto;
+}
+
 @media (max-width: 900px) {
   .news-carousel-track .news-card {
     --news-visible: 2;

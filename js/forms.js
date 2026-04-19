@@ -36,19 +36,13 @@
     button.textContent = isLoading ? 'Submitting...' : button.dataset.defaultText;
   }
 
-  function toFormBody(form) {
-    const formData = new FormData(form);
-    return new URLSearchParams(formData).toString();
-  }
-
   async function submitToNetlify(form) {
-    const body = toFormBody(form);
     return fetch('/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body,
+      body: new URLSearchParams(new FormData(form)).toString(),
     });
   }
 

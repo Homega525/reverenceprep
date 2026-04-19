@@ -82,6 +82,36 @@
   background: var(--color-gold);
 }
 
+.news-carousel-track {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 18px;
+  scrollbar-width: none;
+}
+
+.news-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.news-carousel-track .news-card {
+  min-width: 100%;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+}
+
+.news-carousel-dots .carousel-dot {
+  background: rgba(74, 26, 76, 0.24);
+}
+
+.news-carousel-dots .carousel-dot.active {
+  background: var(--color-primary);
+}
+
+.news-carousel-dots:empty {
+  display: none;
+}
+
 .lightbox {
   position: fixed;
   inset: 0;

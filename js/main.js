@@ -604,7 +604,8 @@
     initHeroCardReveal();
     initStatsCounter();
     await renderArticlePage();
-    renderDynamicContent();
+    await renderDynamicContent();
+    window.CarouselModule?.initHomeNewsCarousel();
   }
 
   document.addEventListener('DOMContentLoaded', initIncludesAndFeatures);

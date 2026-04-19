@@ -93,8 +93,33 @@
     });
   }
 
+  function initHomeNewsCarousel() {
+    const viewport = document.querySelector('#newsGrid');
+    const dotsWrap = document.querySelector('#newsDots');
+    if (!viewport || !dotsWrap) return;
+
+    const slides = Array.from(viewport.children);
+    if (!slides.length) return;
+
+    viewport.classList.add('news-carousel-track');
+    dotsWrap.hidden = slides.length <= 1;
+    dotsWrap.innerHTML = slides
+      .map(
+        (_, idx) =>
+          `<button class="carousel-dot news-dot${idx === 0 ? ' active' : ''}" aria-label="News slide ${idx + 1}"></button>`
+      )
+      .join('');
+
+    createScrollSnapCarousel({
+      viewportSelector: '#newsGrid',
+      dotSelector: '#newsDots .news-dot',
+      autoMs: 5000,
+    });
+  }
+
   window.CarouselModule = {
     initHeroCarousel,
     initTestimonialsCarousel,
+    initHomeNewsCarousel,
   };
 })();

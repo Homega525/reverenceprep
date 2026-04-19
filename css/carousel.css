@@ -95,9 +95,23 @@
 }
 
 .news-carousel-track .news-card {
-  min-width: 100%;
-  flex: 0 0 100%;
-  scroll-snap-align: center;
+  min-width: clamp(220px, 24vw, 290px);
+  flex: 0 0 clamp(220px, 24vw, 290px);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 900px) {
+  .news-carousel-track .news-card {
+    min-width: clamp(220px, 42vw, 320px);
+    flex-basis: clamp(220px, 42vw, 320px);
+  }
+}
+
+@media (max-width: 767px) {
+  .news-carousel-track .news-card {
+    min-width: 80vw;
+    flex-basis: 80vw;
+  }
 }
 
 .news-carousel-dots .carousel-dot {

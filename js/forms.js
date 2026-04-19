@@ -26,16 +26,40 @@
     node.style.display = 'block';
   }
 
-  async function submitToNetlify(form) {
+  function setSubmitState(button, isLoading) {
+    if (!button) return;
+    if (!button.dataset.defaultText) {
+      button.dataset.defaultText = button.textContent || '';
+    }
+    button.disabled = isLoading;
+    button.setAttribute('aria-busy', String(isLoading));
+    button.textContent = isLoading ? 'Submitting...' : button.dataset.defaultText;
+  }
+
+  function toFormBody(form) {
     const formData = new FormData(form);
-    const encoded = new URLSearchParams(formData).toString();
+    return new URLSearchParams(formData).toString();
+  }
+
+  async function submitToNetlify(form) {
+    const body = toFormBody(form);
     return fetch('/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: encoded,
+      body,
     });
+  }
+
+  function getSuccessMessage(formName) {
+    if (formName === 'admission-form') {
+      return 'Thank you! Your admission application has been received. We will contact you shortly.';
+    }
+    if (formName === 'contact-form' || formName === 'quick-contact-form') {
+      return 'Thank you for reaching out! We will get back to you as soon as possible.';
+    }
+    return 'Thank you. Your submission has been received.';
   }
 
   function initForms() {
@@ -44,6 +68,8 @@
 
     forms.forEach((form) => {
       const feedback = form.querySelector('.form-feedback');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const formName = form.getAttribute('name') || '';
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -62,21 +88,28 @@
         }
 
         try {
+          setSubmitState(submitBtn, true);
+
           if (window.location.protocol === 'file:') {
-            setFeedback(feedback, 'success', 'Form validated successfully. On Netlify, this will submit and send notifications.');
-            form.reset();
+            setFeedback(
+              feedback,
+              'error',
+              'Please run this site through a local server to test form submissions.'
+            );
             return;
           }
 
           const response = await submitToNetlify(form);
           if (response.ok) {
-            setFeedback(feedback, 'success', 'Thank you. Your message has been sent successfully.');
+            setFeedback(feedback, 'success', getSuccessMessage(formName));
             form.reset();
           } else {
-            setFeedback(feedback, 'error', 'Submission failed. Please try again shortly.');
+            setFeedback(feedback, 'error', 'Something went wrong. Please try again.');
           }
         } catch (error) {
-          setFeedback(feedback, 'error', 'Network issue. Please check your connection and try again.');
+          setFeedback(feedback, 'error', 'Something went wrong. Please try again.');
+        } finally {
+          setSubmitState(submitBtn, false);
         }
       });
     });

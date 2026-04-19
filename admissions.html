@@ -83,22 +83,22 @@
           <h2 class="section-intro">Admissions Enquiry Form</h2>
           <form
             class="form-card"
-            name="contact-form"
+            name="admission-form"
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
             aria-label="Admissions enquiry form"
           >
-            <input type="hidden" name="form-name" value="contact-form" />
-            <p class="sr-only">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
+            <input type="hidden" name="form-name" value="admission-form" />
+            <p style="display: none">
+              <label>Skip this: <input name="bot-field" /></label>
             </p>
             <div class="grid grid-2">
               <div class="form-group">
                 <label for="adm-name">Student Name</label
                 ><input
                   id="adm-name"
-                  name="student_name"
+                  name="student-name"
                   type="text"
                   required
                 />
@@ -107,7 +107,7 @@
                 <label for="adm-parent">Parent/Guardian Name</label
                 ><input
                   id="adm-parent"
-                  name="parent_name"
+                  name="parent-name"
                   type="text"
                   required
                 />
@@ -116,7 +116,7 @@
                 <label for="adm-age">Student Age</label
                 ><input
                   id="adm-age"
-                  name="student_age"
+                  name="student-age"
                   type="number"
                   min="2"
                   max="25"
@@ -135,11 +135,11 @@
               </div>
               <div class="form-group">
                 <label for="adm-phone">Phone</label
-                ><input id="adm-phone" name="phone" type="tel" required />
+                ><input id="adm-phone" name="parent-phone" type="tel" required />
               </div>
               <div class="form-group">
                 <label for="adm-email">Email</label
-                ><input id="adm-email" name="email" type="email" required />
+                ><input id="adm-email" name="parent-email" type="email" required />
               </div>
             </div>
             <div class="form-group">

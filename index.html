@@ -45,12 +45,6 @@
             Reverence is a distinguished institution dedicated to nurturing
             young minds.
           </p>
-          <div class="btn-row hero-btns">
-            <a class="btn btn-primary" href="admissions.html"
-              >Explore Admissions</a
-            >
-            <a class="btn btn-outline" href="about.html">Learn More</a>
-          </div>
 
           <div class="hero-cards-wrap" aria-label="School highlights">
             <div class="hero-cards-track" id="heroCardsTrack">
@@ -100,6 +94,12 @@
               <button class="hero-dot" aria-label="Hero slide 3"></button>
             </div>
           </div>
+          <div class="btn-row hero-btns">
+            <a class="btn btn-primary" href="admissions.html"
+              >Explore Admissions</a
+            >
+            <a class="btn btn-outline" href="about.html">Learn More</a>
+          </div>
         </div>
       </section>
 
@@ -116,10 +116,6 @@
           <article class="stat-item">
             <h3 class="stat-number" data-count="4">4</h3>
             <p>School Divisions</p>
-          </article>
-          <article class="stat-item">
-            <h3 class="stat-number" data-count="2003">2003</h3>
-            <p>Est. 2003</p>
           </article>
         </div>
       </section>
@@ -345,7 +341,11 @@
                 Our school library has been refreshed with new resources for
                 every level.
               </p>
-              <a class="section-cta" href="article.html?collection=events&amp;slug=2026-01-07-library-upgrade">Read More</a>
+              <a
+                class="section-cta"
+                href="article.html?collection=events&amp;slug=2026-01-07-library-upgrade"
+                >Read More</a
+              >
             </article>
             <article class="news-card">
               <img
@@ -357,7 +357,11 @@
                 Reverence launches community-backed scholarships to support
                 students in need.
               </p>
-              <a class="section-cta" href="article.html?collection=events&amp;slug=2026-02-02-scholarship-drive">Read More</a>
+              <a
+                class="section-cta"
+                href="article.html?collection=events&amp;slug=2026-02-02-scholarship-drive"
+                >Read More</a
+              >
             </article>
             <article class="news-card">
               <img
@@ -369,7 +373,11 @@
                 Our recent exam results highlight consistent dedication from
                 staff and students.
               </p>
-              <a class="section-cta" href="article.html?collection=events&amp;slug=2026-03-18-exam-success">Read More</a>
+              <a
+                class="section-cta"
+                href="article.html?collection=events&amp;slug=2026-03-18-exam-success"
+                >Read More</a
+              >
             </article>
           </div>
           <a class="btn btn-outline section-cta" href="events.html"
@@ -401,15 +409,15 @@
           </div>
           <form
             class="form-card"
-            name="contact-form"
+            name="quick-contact-form"
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
             aria-label="Quick contact form"
           >
-            <input type="hidden" name="form-name" value="contact-form" />
-            <p class="sr-only">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
+            <input type="hidden" name="form-name" value="quick-contact-form" />
+            <p style="display:none">
+              <label>Skip this: <input name="bot-field"></label>
             </p>
             <div class="form-group">
               <label for="quick-name">Name</label>

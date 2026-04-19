@@ -330,55 +330,75 @@
         <div class="container">
           <span class="section-label">News</span>
           <h2 class="section-intro">Latest News</h2>
-          <div class="grid grid-3" id="newsGrid">
-            <article class="news-card">
-              <img
-                src="assets/img/about/news-1.jpg"
-                alt="School library news"
-              /><span class="date-badge">Jan 7, 2026</span>
-              <h3>Library Upgrade Supports Better Reading Culture</h3>
-              <p>
-                Our school library has been refreshed with new resources for
-                every level.
-              </p>
-              <a
-                class="section-cta"
-                href="article.html?collection=events&amp;slug=2026-01-07-library-upgrade"
-                >Read More</a
-              >
-            </article>
-            <article class="news-card">
-              <img
-                src="assets/img/about/news-2.jpg"
-                alt="Scholarship announcement"
-              /><span class="date-badge">Feb 2, 2026</span>
-              <h3>Scholarship Drive for High-Performing Students</h3>
-              <p>
-                Reverence launches community-backed scholarships to support
-                students in need.
-              </p>
-              <a
-                class="section-cta"
-                href="article.html?collection=events&amp;slug=2026-02-02-scholarship-drive"
-                >Read More</a
-              >
-            </article>
-            <article class="news-card">
-              <img
-                src="assets/img/about/news-3.jpg"
-                alt="Exam success celebration"
-              /><span class="date-badge">Mar 18, 2026</span>
-              <h3>Students Record Excellent Exam Performance</h3>
-              <p>
-                Our recent exam results highlight consistent dedication from
-                staff and students.
-              </p>
-              <a
-                class="section-cta"
-                href="article.html?collection=events&amp;slug=2026-03-18-exam-success"
-                >Read More</a
-              >
-            </article>
+          <div class="news-carousel" id="newsCarousel">
+            <button
+              class="news-carousel-arrow news-carousel-arrow-left"
+              id="newsPrev"
+              type="button"
+              aria-label="Previous news"
+            >
+              &#10094;
+            </button>
+            <div class="news-carousel-viewport">
+              <div class="grid grid-3" id="newsGrid">
+                <article class="news-card">
+                  <img
+                    src="assets/img/about/news-1.jpg"
+                    alt="School library news"
+                  /><span class="date-badge">Jan 7, 2026</span>
+                  <h3>Library Upgrade Supports Better Reading Culture</h3>
+                  <p>
+                    Our school library has been refreshed with new resources for
+                    every level.
+                  </p>
+                  <a
+                    class="section-cta"
+                    href="article.html?collection=events&amp;slug=2026-01-07-library-upgrade"
+                    >Read More</a
+                  >
+                </article>
+                <article class="news-card">
+                  <img
+                    src="assets/img/about/news-2.jpg"
+                    alt="Scholarship announcement"
+                  /><span class="date-badge">Feb 2, 2026</span>
+                  <h3>Scholarship Drive for High-Performing Students</h3>
+                  <p>
+                    Reverence launches community-backed scholarships to support
+                    students in need.
+                  </p>
+                  <a
+                    class="section-cta"
+                    href="article.html?collection=events&amp;slug=2026-02-02-scholarship-drive"
+                    >Read More</a
+                  >
+                </article>
+                <article class="news-card">
+                  <img
+                    src="assets/img/about/news-3.jpg"
+                    alt="Exam success celebration"
+                  /><span class="date-badge">Mar 18, 2026</span>
+                  <h3>Students Record Excellent Exam Performance</h3>
+                  <p>
+                    Our recent exam results highlight consistent dedication from
+                    staff and students.
+                  </p>
+                  <a
+                    class="section-cta"
+                    href="article.html?collection=events&amp;slug=2026-03-18-exam-success"
+                    >Read More</a
+                  >
+                </article>
+              </div>
+            </div>
+            <button
+              class="news-carousel-arrow news-carousel-arrow-right"
+              id="newsNext"
+              type="button"
+              aria-label="Next news"
+            >
+              &#10095;
+            </button>
           </div>
           <div
             class="carousel-dots news-carousel-dots"

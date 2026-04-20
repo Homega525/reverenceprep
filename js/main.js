@@ -3,33 +3,33 @@
     navbar: `
       <nav class="site-navbar navbar" aria-label="Primary Navigation">
         <div class="container nav-inner">
-          <a href="index.html" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a>
+          <a href="/" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a>
           <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer"><span aria-hidden="true">☰</span></button>
           <ul class="nav-links" id="desktopNav">
-            <li><a data-page="home" href="index.html">Home</a></li>
-            <li><a data-page="about" href="about.html">About</a></li>
-            <li><a data-page="academics" href="academics.html">Academics</a></li>
-            <li class="has-dropdown"><button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Schools</button><ul class="dropdown-menu" aria-label="Schools submenu"><li><a data-page="shs" href="shs.html">SHS</a></li><li><a data-page="jhs" href="jhs.html">JHS</a></li><li><a data-page="primary" href="primary.html">Primary</a></li><li><a data-page="preschool" href="preschool.html">Pre-School</a></li></ul></li>
-            <li><a data-page="gallery" href="gallery.html">Gallery</a></li>
-            <li><a data-page="events" href="events.html">Events</a></li>
-            <li><a data-page="blog" href="blog.html">Blog</a></li>
-            <li><a data-page="contact" href="contact.html">Contact</a></li>
+            <li><a data-page="home" href="/">Home</a></li>
+            <li><a data-page="about" href="/about">About</a></li>
+            <li><a data-page="academics" href="/academics">Academics</a></li>
+            <li class="has-dropdown"><button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Schools</button><ul class="dropdown-menu" aria-label="Schools submenu"><li><a data-page="shs" href="/shs">SHS</a></li><li><a data-page="jhs" href="/jhs">JHS</a></li><li><a data-page="primary" href="/primary">Primary</a></li><li><a data-page="preschool" href="/preschool">Pre-School</a></li></ul></li>
+            <li><a data-page="gallery" href="/gallery">Gallery</a></li>
+            <li><a data-page="events" href="/events">Events</a></li>
+            <li><a data-page="blog" href="/blog">Blog</a></li>
+            <li><a data-page="contact" href="/contact">Contact</a></li>
           </ul>
-          <a class="btn btn-admissions btn-gold" data-page="admissions" href="admissions.html">Admissions</a>
+          <a class="btn btn-admissions btn-gold" data-page="admissions" href="/admissions">Admissions</a>
         </div>
         <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
         <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation" aria-hidden="true">
-          <div class="drawer-head"><a href="index.html" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a><button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button></div>
+          <div class="drawer-head"><a href="/" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a><button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button></div>
           <ul class="drawer-links">
-            <li><a data-page="home" href="index.html">Home</a></li>
-            <li><a data-page="about" href="about.html">About</a></li>
-            <li><a data-page="academics" href="academics.html">Academics</a></li>
-            <li><button class="drawer-dropdown-toggle" id="drawerSchoolsToggle" aria-expanded="false">Schools ▾</button><ul class="drawer-dropdown" id="drawerSchoolsMenu" hidden><li><a data-page="shs" href="shs.html">SHS</a></li><li><a data-page="jhs" href="jhs.html">JHS</a></li><li><a data-page="primary" href="primary.html">Primary</a></li><li><a data-page="preschool" href="preschool.html">Pre-School</a></li></ul></li>
-            <li><a data-page="gallery" href="gallery.html">Gallery</a></li>
-            <li><a data-page="events" href="events.html">Events</a></li>
-            <li><a data-page="blog" href="blog.html">Blog</a></li>
-            <li><a data-page="contact" href="contact.html">Contact</a></li>
-            <li><a data-page="admissions" class="btn btn-primary" href="admissions.html">Admissions</a></li>
+            <li><a data-page="home" href="/">Home</a></li>
+            <li><a data-page="about" href="/about">About</a></li>
+            <li><a data-page="academics" href="/academics">Academics</a></li>
+            <li><button class="drawer-dropdown-toggle" id="drawerSchoolsToggle" aria-expanded="false">Schools ▾</button><ul class="drawer-dropdown" id="drawerSchoolsMenu" hidden><li><a data-page="shs" href="/shs">SHS</a></li><li><a data-page="jhs" href="/jhs">JHS</a></li><li><a data-page="primary" href="/primary">Primary</a></li><li><a data-page="preschool" href="/preschool">Pre-School</a></li></ul></li>
+            <li><a data-page="gallery" href="/gallery">Gallery</a></li>
+            <li><a data-page="events" href="/events">Events</a></li>
+            <li><a data-page="blog" href="/blog">Blog</a></li>
+            <li><a data-page="contact" href="/contact">Contact</a></li>
+            <li><a data-page="admissions" class="btn btn-primary" href="/admissions">Admissions</a></li>
           </ul>
         </aside>
       </nav>
@@ -37,9 +37,9 @@
     footer: `
       <div class="site-footer-wrap footer">
         <div class="container footer-grid">
-          <div><div class="footer-logo"><a href="index.html" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a></div><p class="footer-tagline">A nurturing and academically excellent preparatory school in Offinso.</p><div class="social-row" aria-label="Social media links"><a href="https://www.facebook.com/profile.php?id=100077643001785" aria-label="Facebook">Facebook</a><a href="https://www.tiktok.com/@reverenceprepsch" aria-label="TikTok">TikTok</a></div></div>
-          <div><h3>Activities</h3><ul><li><a href="academics.html">Academic</a></li><li><a href="events.html">News and Events</a></li><li><a href="about.html">Extra-Curricular Activities</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
-          <div><h3>Quick Links</h3><ul><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+          <div><div class="footer-logo"><a href="/" class="nav-logo" aria-label="Reverence Preparatory School Home"><span class="logo-wordmark">Reverence</span><span class="logo-sub">Preparatory School</span></a></div><p class="footer-tagline">A nurturing and academically excellent preparatory school in Offinso.</p><div class="social-row" aria-label="Social media links"><a href="https://www.facebook.com/profile.php?id=100077643001785" aria-label="Facebook">Facebook</a><a href="https://www.tiktok.com/@reverenceprepsch" aria-label="TikTok">TikTok</a></div></div>
+          <div><h3>Activities</h3><ul><li><a href="/academics">Academic</a></li><li><a href="/events">News and Events</a></li><li><a href="/about">Extra-Curricular Activities</a></li><li><a href="/gallery">Gallery</a></li></ul></div>
+          <div><h3>Quick Links</h3><ul><li><a href="/terms">Terms &amp; Conditions</a></li><li><a href="/privacy">Privacy Policy</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li></ul></div>
           <div><h3>Contact</h3><ul><li>Old Town, Offinso, Ashanti, Ghana</li><li><a href="tel:+233554019237">+233 554 019 237</a></li><li><a href="mailto:reverence475@gmail.com">reverence475@gmail.com</a></li></ul></div>
         </div>
         <div class="footer-bottom"><p>&copy; 2026 Reverence Preparatory School. All Rights Reserved.</p></div>
@@ -307,7 +307,7 @@
   function getArticleHref(data, fallbackCollection) {
     const collection = encodeURIComponent(data._collection || fallbackCollection);
     const slug = encodeURIComponent(data._slug || '');
-    return `article.html?collection=${collection}&slug=${slug}`;
+    return `/article?collection=${collection}&slug=${slug}`;
   }
 
   function renderCard(data, type) {
@@ -511,7 +511,7 @@
     }
     if (articleBackLink) {
       const isBlog = entry._collection === 'blog';
-      articleBackLink.href = isBlog ? 'blog.html' : 'events.html';
+      articleBackLink.href = isBlog ? '/blog' : '/events';
       articleBackLink.textContent = isBlog ? 'Back to Blog' : 'Back to News & Events';
     }
 

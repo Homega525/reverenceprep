@@ -219,6 +219,19 @@ body[data-page='home'] .site-navbar:not(.nav-solid) .logo-sub {
   background: var(--color-primary-light);
 }
 
+/* Match requested CTA colors for btn-outline + section-cta buttons. */
+.btn.btn-outline.section-cta {
+  background: #ffffff;
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn.btn-outline.section-cta:hover {
+  background: #e8b84b;
+  color: var(--color-primary-dark);
+  border-color: #e8b84b;
+}
+
 .btn-gold,
 .btn-admissions {
   background: var(--color-gold);

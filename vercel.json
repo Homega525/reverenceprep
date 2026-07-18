@@ -1,10 +1,4 @@
 {
-  "redirects": [{ "source": "/admin", "destination": "/admin/index.html" }]
-}
-
-{
   "cleanUrls": true,
-  "redirects": [
-    { "source": "/admin", "destination": "/admin/index.html" }
-  ]
+  "redirects": [{ "source": "/admin", "destination": "/admin/index.html" }]
 }

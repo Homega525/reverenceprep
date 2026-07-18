@@ -36,10 +36,6 @@ public_folder: "/assets/img/uploads"
 
 collections:
   - name: "blog"
-    ...
-
-collections:
-  - name: "blog"
     label: "Blog Posts"
     folder: "content/blog"
     create: true
@@ -59,8 +55,19 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Type", name: "category", widget: "select", options: ["Event", "News"], default: "Event" }
-      - { label: "Event Date", name: "event_date", widget: "date", required: false }
+      - {
+          label: "Type",
+          name: "category",
+          widget: "select",
+          options: ["Event", "News"],
+          default: "Event",
+        }
+      - {
+          label: "Event Date",
+          name: "event_date",
+          widget: "date",
+          required: false,
+        }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "Description", name: "excerpt", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -71,6 +78,11 @@ collections:
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Events", "Campus", "Students", "Sports"] }
+      - {
+          label: "Category",
+          name: "category",
+          widget: "select",
+          options: ["Events", "Campus", "Students", "Sports"],
+        }
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Date", name: "date", widget: "date" }

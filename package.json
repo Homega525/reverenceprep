@@ -1,0 +1,15 @@
+{
+  "name": "reverenceprep",
+  "version": "1.0.0",
+  "description": "## Logo Setup Place the school logo file at: `assets/img/logo/reverence-logo.jpg`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vercel/node": "^5.8.26"
+  }
+}

@@ -49,25 +49,25 @@
 
   const fallbackContentFiles = {
     blog: [
-      'content/blog/2026-01-12-study-habits.md',
-      'content/blog/2026-02-08-stem-fair.md',
-      'content/blog/2026-03-03-parent-partnership.md',
+      "content/blog/2026-01-12-study-habits.md",
+      "content/blog/2026-02-08-stem-fair.md",
+      "content/blog/2026-03-03-parent-partnership.md",
     ],
     events: [
-      'content/events/2026-01-07-library-upgrade.md',
-      'content/events/2026-01-20-open-day.md',
-      'content/events/2026-02-02-scholarship-drive.md',
-      'content/events/2026-02-14-sports-festival.md',
-      'content/events/2026-03-18-exam-success.md',
-      'content/events/2026-03-10-cultural-week.md',
+      "content/events/2026-01-07-library-upgrade.md",
+      "content/events/2026-01-20-open-day.md",
+      "content/events/2026-02-02-scholarship-drive.md",
+      "content/events/2026-02-14-sports-festival.md",
+      "content/events/2026-03-18-exam-success.md",
+      "content/events/2026-03-10-cultural-week.md",
     ],
     gallery: [
-      'content/gallery/gallery-events-1.md',
-      'content/gallery/gallery-campus-1.md',
-      'content/gallery/gallery-students-1.md',
-      'content/gallery/gallery-sports-1.md',
-      'content/gallery/gallery-events-2.md',
-      'content/gallery/gallery-campus-2.md',
+      "content/gallery/gallery-events-1.md",
+      "content/gallery/gallery-campus-1.md",
+      "content/gallery/gallery-students-1.md",
+      "content/gallery/gallery-sports-1.md",
+      "content/gallery/gallery-events-2.md",
+      "content/gallery/gallery-campus-2.md",
     ],
   };
 
@@ -78,17 +78,22 @@
 
     manifestPromise = (async () => {
       try {
-        const response = await fetch('/.netlify/functions/content-manifest', { cache: 'no-store' });
-        if (!response.ok) throw new Error('manifest request failed');
+        const response = await fetch("/api/content-manifest", {
+          cache: "no-store",
+        });
+        if (!response.ok) throw new Error("manifest request failed");
         const payload = await response.json();
-        if (!payload || typeof payload !== 'object') throw new Error('invalid manifest payload');
+        if (!payload || typeof payload !== "object")
+          throw new Error("invalid manifest payload");
 
-        const collections = ['blog', 'events', 'gallery'];
+        const collections = ["blog", "events", "gallery"];
         const manifest = {};
 
         collections.forEach((name) => {
           const files = Array.isArray(payload[name]) ? payload[name] : [];
-          manifest[name] = files.filter((file) => typeof file === 'string' && file.endsWith('.md'));
+          manifest[name] = files.filter(
+            (file) => typeof file === "string" && file.endsWith(".md"),
+          );
         });
 
         return manifest;
@@ -106,46 +111,46 @@
 
     try {
       const response = await fetch(path);
-      if (!response.ok) throw new Error('Failed to fetch partial');
+      if (!response.ok) throw new Error("Failed to fetch partial");
       target.innerHTML = await response.text();
     } catch (error) {
-      target.innerHTML = fallbackPartials[fallbackKey] || '';
+      target.innerHTML = fallbackPartials[fallbackKey] || "";
     }
   }
 
   function initFadeIns() {
-    const elements = document.querySelectorAll('[data-animate]');
+    const elements = document.querySelectorAll("[data-animate]");
     if (!elements.length) return;
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in', 'visible');
+            entry.target.classList.add("fade-in", "visible");
             obs.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.12 },
     );
 
     elements.forEach((el) => {
-      el.classList.add('fade-in');
+      el.classList.add("fade-in");
       observer.observe(el);
     });
   }
 
   function initHeroCardReveal() {
-    const cardsWrap = document.querySelector('.hero-cards-wrap');
+    const cardsWrap = document.querySelector(".hero-cards-wrap");
     if (!cardsWrap) return;
 
-    const cards = Array.from(cardsWrap.querySelectorAll('.hero-image-card'));
+    const cards = Array.from(cardsWrap.querySelectorAll(".hero-image-card"));
     if (!cards.length) return;
 
-    cardsWrap.classList.add('cards-reveal-ready');
+    cardsWrap.classList.add("cards-reveal-ready");
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      cards.forEach((card) => card.classList.add('in-view'));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      cards.forEach((card) => card.classList.add("in-view"));
       return;
     }
 
@@ -155,13 +160,13 @@
           if (!entry.isIntersecting) return;
 
           cards.forEach((card, index) => {
-            setTimeout(() => card.classList.add('in-view'), index * 120);
+            setTimeout(() => card.classList.add("in-view"), index * 120);
           });
 
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.24, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0.24, rootMargin: "0px 0px -10% 0px" },
     );
 
     observer.observe(cardsWrap);
@@ -169,33 +174,33 @@
 
   function initSmoothAnchorLinks() {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', (event) => {
-        const id = anchor.getAttribute('href');
+      anchor.addEventListener("click", (event) => {
+        const id = anchor.getAttribute("href");
         const target = id ? document.querySelector(id) : null;
         if (!target) return;
         event.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
   }
 
   function initStatsCounter() {
-    const statsBar = document.querySelector('.stats-bar');
+    const statsBar = document.querySelector(".stats-bar");
     if (!statsBar) return;
 
-    const statItems = Array.from(statsBar.querySelectorAll('.stat-item'));
-    const statNumbers = Array.from(statsBar.querySelectorAll('.stat-number'));
+    const statItems = Array.from(statsBar.querySelectorAll(".stat-item"));
+    const statNumbers = Array.from(statsBar.querySelectorAll(".stat-number"));
     if (!statNumbers.length) return;
 
     const animateValue = (el, delayMs = 0) => {
-      const target = Number.parseInt(el.dataset.count || '0', 10);
-      const prefix = el.dataset.prefix || '';
-      const suffix = el.dataset.suffix || '';
+      const target = Number.parseInt(el.dataset.count || "0", 10);
+      const prefix = el.dataset.prefix || "";
+      const suffix = el.dataset.suffix || "";
       const duration = 900;
 
       setTimeout(() => {
         const start = performance.now();
-        el.classList.add('is-counting');
+        el.classList.add("is-counting");
 
         const tick = (now) => {
           const elapsed = now - start;
@@ -208,8 +213,8 @@
             requestAnimationFrame(tick);
           } else {
             el.textContent = `${prefix}${target.toLocaleString()}${suffix}`;
-            el.classList.remove('is-counting');
-            el.classList.add('counted');
+            el.classList.remove("is-counting");
+            el.classList.add("counted");
           }
         };
 
@@ -223,7 +228,7 @@
           if (!entry.isIntersecting) return;
 
           statItems.forEach((item, index) => {
-            setTimeout(() => item.classList.add('in-view'), index * 100);
+            setTimeout(() => item.classList.add("in-view"), index * 100);
           });
 
           statNumbers.forEach((num, index) => {
@@ -233,7 +238,7 @@
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.45 }
+      { threshold: 0.45 },
     );
 
     observer.observe(statsBar);
@@ -241,19 +246,22 @@
 
   function parseFrontmatter(markdown) {
     const result = { body: markdown };
-    if (!markdown.startsWith('---')) return result;
+    if (!markdown.startsWith("---")) return result;
 
-    const parts = markdown.split('---');
+    const parts = markdown.split("---");
     if (parts.length < 3) return result;
 
     const frontmatter = parts[1].trim();
-    const body = parts.slice(2).join('---').trim();
+    const body = parts.slice(2).join("---").trim();
 
-    frontmatter.split('\n').forEach((line) => {
-      const idx = line.indexOf(':');
+    frontmatter.split("\n").forEach((line) => {
+      const idx = line.indexOf(":");
       if (idx === -1) return;
       const key = line.slice(0, idx).trim();
-      const value = line.slice(idx + 1).trim().replace(/^"|"$/g, '');
+      const value = line
+        .slice(idx + 1)
+        .trim()
+        .replace(/^"|"$/g, "");
       result[key] = value;
     });
 
@@ -268,32 +276,36 @@
       files.map(async (file) => {
         try {
           const response = await fetch(file);
-          if (!response.ok) throw new Error('failed');
+          if (!response.ok) throw new Error("failed");
           const text = await response.text();
           return {
             ...parseFrontmatter(text),
             _file: file,
-            _slug: file.split('/').pop()?.replace('.md', ''),
+            _slug: file.split("/").pop()?.replace(".md", ""),
             _collection: collectionName,
           };
         } catch (error) {
           return null;
         }
-      })
+      }),
     );
 
     return rows.filter(Boolean);
   }
 
   function formatDate(value) {
-    if (!value) return 'Date TBA';
+    if (!value) return "Date TBA";
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return value;
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   }
 
   function normalizeCategory(category) {
-    return (category || '').toString().trim().toLowerCase();
+    return (category || "").toString().trim().toLowerCase();
   }
 
   function sortByDateDesc(entries) {
@@ -305,27 +317,34 @@
   }
 
   function getArticleHref(data, fallbackCollection) {
-    const collection = encodeURIComponent(data._collection || fallbackCollection);
-    const slug = encodeURIComponent(data._slug || '');
+    const collection = encodeURIComponent(
+      data._collection || fallbackCollection,
+    );
+    const slug = encodeURIComponent(data._slug || "");
     return `/article?collection=${collection}&slug=${slug}`;
   }
 
   function renderCard(data, type) {
-    const title = data.title || 'Untitled';
-    const image = data.image || 'assets/img/about/news-1.jpg';
-    const excerpt = data.excerpt || data.body?.slice(0, 130) || 'Coming soon.';
+    const title = data.title || "Untitled";
+    const image = data.image || "assets/img/about/news-1.jpg";
+    const excerpt = data.excerpt || data.body?.slice(0, 130) || "Coming soon.";
     const date = formatDate(data.event_date || data.date);
 
-    if (type === 'gallery') {
+    if (type === "gallery") {
       return `
-        <figure class="gallery-item" data-category="${(data.category || 'All').toLowerCase()}">
+        <figure class="gallery-item" data-category="${(data.category || "All").toLowerCase()}">
           <img src="${image}" alt="${title}">
           <figcaption>${title}</figcaption>
         </figure>
       `;
     }
 
-    const articleClass = type === 'blog' ? 'blog-card' : type === 'events' ? 'event-card' : 'news-card';
+    const articleClass =
+      type === "blog"
+        ? "blog-card"
+        : type === "events"
+          ? "event-card"
+          : "news-card";
     return `
       <article class="${articleClass}">
         <img src="${image}" alt="${title}">
@@ -338,89 +357,107 @@
   }
 
   async function renderDynamicContent() {
-    const blogGrid = document.getElementById('blogGrid');
-    const eventsGrid = document.getElementById('eventsGrid');
-    const newsGrid = document.getElementById('newsGrid');
-    const galleryGrid = document.getElementById('galleryGrid');
+    const blogGrid = document.getElementById("blogGrid");
+    const eventsGrid = document.getElementById("eventsGrid");
+    const newsGrid = document.getElementById("newsGrid");
+    const galleryGrid = document.getElementById("galleryGrid");
 
     if (blogGrid) {
-      const entries = await loadCollection('blog');
+      const entries = await loadCollection("blog");
       if (entries.length) {
-        blogGrid.innerHTML = entries.map((entry) => renderCard(entry, 'blog')).join('');
+        blogGrid.innerHTML = entries
+          .map((entry) => renderCard(entry, "blog"))
+          .join("");
       }
     }
 
     if (eventsGrid) {
-      const entries = await loadCollection('events');
+      const entries = await loadCollection("events");
       if (entries.length) {
         const sorted = sortByDateDesc(entries);
-        eventsGrid.innerHTML = sorted.map((entry) => renderCard(entry, 'events')).join('');
+        eventsGrid.innerHTML = sorted
+          .map((entry) => renderCard(entry, "events"))
+          .join("");
       }
     }
 
     if (newsGrid) {
-      const entries = await loadCollection('events');
+      const entries = await loadCollection("events");
       if (entries.length) {
         const newsEntries = sortByDateDesc(entries).filter((entry) => {
           const category = normalizeCategory(entry.category);
-          return category === 'news' || (!category && !entry.event_date);
+          return category === "news" || (!category && !entry.event_date);
         });
         if (newsEntries.length) {
-          newsGrid.innerHTML = newsEntries.map((entry) => renderCard(entry, 'news')).join('');
+          newsGrid.innerHTML = newsEntries
+            .map((entry) => renderCard(entry, "news"))
+            .join("");
         }
       }
     }
 
     if (galleryGrid) {
-      const entries = await loadCollection('gallery');
+      const entries = await loadCollection("gallery");
       if (entries.length) {
-        galleryGrid.innerHTML = entries.map((entry) => renderCard(entry, 'gallery')).join('');
+        galleryGrid.innerHTML = entries
+          .map((entry) => renderCard(entry, "gallery"))
+          .join("");
       }
       initGalleryFeatures();
     }
   }
 
   function escapeHtml(value) {
-    return String(value || '')
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#39;');
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
   }
 
   function renderInlineMarkdown(text) {
-    let rendered = escapeHtml(text || '');
-    rendered = rendered.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)/g, (_full, alt, src, title) => {
-      const safeAlt = escapeHtml(alt);
-      const safeSrc = escapeHtml(src);
-      const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
-      return `<img src="${safeSrc}" alt="${safeAlt}"${titleAttr}>`;
-    });
-    rendered = rendered.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_full, label, href) => {
-      const safeLabel = escapeHtml(label);
-      const safeHref = escapeHtml(href);
-      const external = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
-      return `<a href="${safeHref}"${external}>${safeLabel}</a>`;
-    });
+    let rendered = escapeHtml(text || "");
+    rendered = rendered.replace(
+      /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)/g,
+      (_full, alt, src, title) => {
+        const safeAlt = escapeHtml(alt);
+        const safeSrc = escapeHtml(src);
+        const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
+        return `<img src="${safeSrc}" alt="${safeAlt}"${titleAttr}>`;
+      },
+    );
+    rendered = rendered.replace(
+      /\[([^\]]+)\]\(([^)]+)\)/g,
+      (_full, label, href) => {
+        const safeLabel = escapeHtml(label);
+        const safeHref = escapeHtml(href);
+        const external = /^https?:\/\//i.test(href)
+          ? ' target="_blank" rel="noopener noreferrer"'
+          : "";
+        return `<a href="${safeHref}"${external}>${safeLabel}</a>`;
+      },
+    );
     return rendered;
   }
 
   function markdownToHtml(markdown) {
-    const lines = (markdown || '').replace(/\r\n/g, '\n').split('\n');
+    const lines = (markdown || "").replace(/\r\n/g, "\n").split("\n");
     const blocks = [];
     let paragraph = [];
     let list = [];
 
     const flushParagraph = () => {
       if (!paragraph.length) return;
-      blocks.push(`<p>${renderInlineMarkdown(paragraph.join(' '))}</p>`);
+      blocks.push(`<p>${renderInlineMarkdown(paragraph.join(" "))}</p>`);
       paragraph = [];
     };
 
     const flushList = () => {
       if (!list.length) return;
-      blocks.push(`<ul>${list.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join('')}</ul>`);
+      blocks.push(
+        `<ul>${list.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`,
+      );
       list = [];
     };
 
@@ -432,34 +469,34 @@
         return;
       }
 
-      if (line.startsWith('### ')) {
+      if (line.startsWith("### ")) {
         flushParagraph();
         flushList();
         blocks.push(`<h3>${renderInlineMarkdown(line.slice(4))}</h3>`);
         return;
       }
 
-      if (line.startsWith('## ')) {
+      if (line.startsWith("## ")) {
         flushParagraph();
         flushList();
         blocks.push(`<h2>${renderInlineMarkdown(line.slice(3))}</h2>`);
         return;
       }
 
-      if (line.startsWith('# ')) {
+      if (line.startsWith("# ")) {
         flushParagraph();
         flushList();
         blocks.push(`<h1>${renderInlineMarkdown(line.slice(2))}</h1>`);
         return;
       }
 
-      if (line.startsWith('- ')) {
+      if (line.startsWith("- ")) {
         flushParagraph();
         list.push(line.slice(2));
         return;
       }
 
-      if (line.startsWith('![')) {
+      if (line.startsWith("![")) {
         flushParagraph();
         flushList();
         blocks.push(renderInlineMarkdown(line));
@@ -471,61 +508,69 @@
 
     flushParagraph();
     flushList();
-    return blocks.join('\n');
+    return blocks.join("\n");
   }
 
   async function renderArticlePage() {
-    const articleBody = document.getElementById('articleBody');
+    const articleBody = document.getElementById("articleBody");
     if (!articleBody) return;
 
     const params = new URLSearchParams(window.location.search);
-    const collection = params.get('collection') || 'events';
-    const slug = params.get('slug') || '';
+    const collection = params.get("collection") || "events";
+    const slug = params.get("slug") || "";
 
-    const articleTitle = document.getElementById('articleTitle');
-    const articleMeta = document.getElementById('articleMeta');
-    const articleImage = document.getElementById('articleImage');
-    const articleCategory = document.getElementById('articleCategory');
-    const articleBackLink = document.getElementById('articleBackLink');
+    const articleTitle = document.getElementById("articleTitle");
+    const articleMeta = document.getElementById("articleMeta");
+    const articleImage = document.getElementById("articleImage");
+    const articleCategory = document.getElementById("articleCategory");
+    const articleBackLink = document.getElementById("articleBackLink");
 
     const entries = await loadCollection(collection);
     const entry = entries.find((row) => row._slug === slug);
 
     if (!entry) {
-      if (articleTitle) articleTitle.textContent = 'Article not found';
-      if (articleMeta) articleMeta.textContent = 'The requested article could not be loaded.';
-      articleBody.innerHTML = '<p>Please return to News & Events or Blog and open another article.</p>';
+      if (articleTitle) articleTitle.textContent = "Article not found";
+      if (articleMeta)
+        articleMeta.textContent = "The requested article could not be loaded.";
+      articleBody.innerHTML =
+        "<p>Please return to News & Events or Blog and open another article.</p>";
       if (articleImage) articleImage.remove();
       return;
     }
 
-    if (articleTitle) articleTitle.textContent = entry.title || 'Article';
-    if (articleMeta) articleMeta.textContent = formatDate(entry.event_date || entry.date);
+    if (articleTitle) articleTitle.textContent = entry.title || "Article";
+    if (articleMeta)
+      articleMeta.textContent = formatDate(entry.event_date || entry.date);
     if (articleImage) {
-      articleImage.src = entry.image || 'assets/img/about/news-1.jpg';
-      articleImage.alt = entry.title || 'Article image';
+      articleImage.src = entry.image || "assets/img/about/news-1.jpg";
+      articleImage.alt = entry.title || "Article image";
     }
     if (articleCategory) {
-      const category = normalizeCategory(entry.category) || (entry._collection === 'blog' ? 'blog' : 'event');
-      articleCategory.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+      const category =
+        normalizeCategory(entry.category) ||
+        (entry._collection === "blog" ? "blog" : "event");
+      articleCategory.textContent =
+        category.charAt(0).toUpperCase() + category.slice(1);
     }
     if (articleBackLink) {
-      const isBlog = entry._collection === 'blog';
-      articleBackLink.href = isBlog ? '/blog' : '/events';
-      articleBackLink.textContent = isBlog ? 'Back to Blog' : 'Back to News & Events';
+      const isBlog = entry._collection === "blog";
+      articleBackLink.href = isBlog ? "/blog" : "/events";
+      articleBackLink.textContent = isBlog
+        ? "Back to Blog"
+        : "Back to News & Events";
     }
 
     articleBody.innerHTML = markdownToHtml(entry.body);
   }
 
   function initGalleryFeatures() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('galleryLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const prevBtn = document.getElementById('lightboxPrev');
-    const nextBtn = document.getElementById('lightboxNext');
-    const closeBtn = document.getElementById('lightboxClose');
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const items = document.querySelectorAll(".gallery-item");
+    const lightbox = document.getElementById("galleryLightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const prevBtn = document.getElementById("lightboxPrev");
+    const nextBtn = document.getElementById("lightboxNext");
+    const closeBtn = document.getElementById("lightboxClose");
 
     if (!items.length) return;
 
@@ -533,64 +578,66 @@
     let currentIndex = 0;
 
     filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener("click", () => {
         const filter = button.dataset.filter;
-        filterButtons.forEach((btn) => btn.classList.remove('active'));
-        button.classList.add('active');
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
 
         items.forEach((item) => {
-          const category = item.dataset.category || '';
-          const show = filter === 'all' || category === filter;
-          item.style.display = show ? 'block' : 'none';
+          const category = item.dataset.category || "";
+          const show = filter === "all" || category === filter;
+          item.style.display = show ? "block" : "none";
         });
 
-        activeItems = Array.from(items).filter((item) => item.style.display !== 'none');
+        activeItems = Array.from(items).filter(
+          (item) => item.style.display !== "none",
+        );
       });
     });
 
     const openLightbox = (index) => {
       if (!lightbox || !lightboxImage || !activeItems.length) return;
       currentIndex = (index + activeItems.length) % activeItems.length;
-      const img = activeItems[currentIndex].querySelector('img');
+      const img = activeItems[currentIndex].querySelector("img");
       if (!img) return;
       lightboxImage.src = img.src;
       lightboxImage.alt = img.alt;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
     };
 
     const closeLightbox = () => {
       if (!lightbox) return;
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
     };
 
     const shift = (step) => openLightbox(currentIndex + step);
 
     activeItems.forEach((item, index) => {
-      item.addEventListener('click', () => openLightbox(index));
+      item.addEventListener("click", () => openLightbox(index));
     });
 
-    prevBtn?.addEventListener('click', () => shift(-1));
-    nextBtn?.addEventListener('click', () => shift(1));
-    closeBtn?.addEventListener('click', closeLightbox);
+    prevBtn?.addEventListener("click", () => shift(-1));
+    nextBtn?.addEventListener("click", () => shift(1));
+    closeBtn?.addEventListener("click", closeLightbox);
 
-    lightbox?.addEventListener('click', (event) => {
+    lightbox?.addEventListener("click", (event) => {
       if (event.target === lightbox) closeLightbox();
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (!lightbox?.classList.contains('open')) return;
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft') shift(-1);
-      if (event.key === 'ArrowRight') shift(1);
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox?.classList.contains("open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") shift(-1);
+      if (event.key === "ArrowRight") shift(1);
     });
   }
 
   async function initIncludesAndFeatures() {
     await Promise.all([
-      loadPartial('#site-header', 'partials/navbar.html', 'navbar'),
-      loadPartial('#site-footer', 'partials/footer.html', 'footer'),
+      loadPartial("#site-header", "partials/navbar.html", "navbar"),
+      loadPartial("#site-footer", "partials/footer.html", "footer"),
     ]);
 
     window.NavbarModule?.initNavbar();
@@ -608,5 +655,5 @@
     window.CarouselModule?.initHomeNewsCarousel();
   }
 
-  document.addEventListener('DOMContentLoaded', initIncludesAndFeatures);
+  document.addEventListener("DOMContentLoaded", initIncludesAndFeatures);
 })();

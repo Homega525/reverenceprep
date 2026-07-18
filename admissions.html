@@ -83,18 +83,18 @@
           <h2 class="section-intro">Admissions Enquiry Form</h2>
           <form
             class="form-card"
-            name="admission-form"
-            action="/"
+            id="admission-form"
+            action="https://formsubmit.co/ajax/school-email@example.com"
             method="POST"
-            data-netlify="true"
-            netlify
-            netlify-honeypot="bot-field"
             aria-label="Admissions enquiry form"
           >
-            <input type="hidden" name="form-name" value="admission-form" />
-            <p style="display: none">
-              <label>Skip this: <input name="bot-field" /></label>
-            </p>
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Admission Enquiry"
+            />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
             <div class="grid grid-2">
               <div class="form-group">
                 <label for="adm-name">Student Name</label
@@ -137,11 +137,21 @@
               </div>
               <div class="form-group">
                 <label for="adm-phone">Phone</label
-                ><input id="adm-phone" name="parent-phone" type="tel" required />
+                ><input
+                  id="adm-phone"
+                  name="parent-phone"
+                  type="tel"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="adm-email">Email</label
-                ><input id="adm-email" name="parent-email" type="email" required />
+                ><input
+                  id="adm-email"
+                  name="parent-email"
+                  type="email"
+                  required
+                />
               </div>
             </div>
             <div class="form-group">

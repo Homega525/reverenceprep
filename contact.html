@@ -46,10 +46,10 @@
           </ul>
         </div>
 
-<form class="form-card" name="contact-form" action="/thank-you" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field">          <input type="hidden" name="form-name" value="contact-form">
-          <p style="display:none">
-            <label>Skip this: <input name="bot-field"></label>
-          </p>
+<form class="form-card" id="contact-form" action="https://formsubmit.co/ajax/school-email@example.com" method="POST" aria-label="Contact form">
+          <input type="hidden" name="_subject" value="New Contact Message">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           <div class="form-group"><label for="contact-name">Full Name</label><input id="contact-name" name="name" type="text" required></div>
           <div class="form-group"><label for="contact-email">Email Address</label><input id="contact-email" name="email" type="email" required></div>
           <div class="form-group"><label for="contact-phone">Phone Number</label><input id="contact-phone" name="phone" type="tel" required></div>
@@ -60,14 +60,6 @@
         </form>
       </div>
     </section>
-    <div style="display:none">
-  <form name="contact-form" netlify>
-    <input name="name">
-    <input name="email">
-    <input name="phone">
-    <input name="subject">
-    <textarea name="message"></textarea>
-  </form>
   </main>
   <footer id="site-footer" class="site-footer footer"></footer>
   
